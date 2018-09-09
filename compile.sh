@@ -1,0 +1,1 @@
+valac --pkg=gtk+-2.0 -o tp-icon main.vala
