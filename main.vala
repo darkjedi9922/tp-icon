@@ -10,12 +10,22 @@ public class TpIconApp : GLib.Object
     class TpIcon
     {
         private StatusIcon icon;
+        private Gtk.Menu menu;
 
         public TpIcon()
         {
             icon = new StatusIcon();
             icon.set_visible(true);
+            icon.set_has_tooltip(true);
+            icon.query_tooltip.connect(updateTooltip);
+            icon.popup_menu.connect(popupMenu);
             updateIcon();
+            
+            menu = new Gtk.Menu();
+            var menuQuit = new ImageMenuItem.from_stock(Stock.QUIT, null);
+            menuQuit.activate.connect(Gtk.main_quit);
+            menu.append(menuQuit);
+            menu.show_all();
         }
 
         public void updateIcon()
@@ -60,6 +70,16 @@ public class TpIconApp : GLib.Object
                     });
                 }
             });
+        }
+
+        public bool updateTooltip(int x, int y, bool keyboard_mode, Tooltip tooltip)
+        {
+            icon.set_tooltip_text("+" + getCurrentTemperature().to_string() + "°C");
+            return false;
+        }
+
+        private void popupMenu(uint button, uint time) {
+            menu.popup(null, null, null, button, time);
         }
     }
 
