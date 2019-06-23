@@ -13,7 +13,7 @@ The icons suppose temperature levels from cold to dangerously hot:
     <img src="icons/bad-1.png" width="25px">
 </div>
 
-## Gettng Started
+## Getting Started
 
 ### Prerequisties
 
