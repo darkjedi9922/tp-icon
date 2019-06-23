@@ -1,1 +1,1 @@
-valac --pkg=gtk+-2.0 -o tp-icon main.vala
+valac --pkg=gtk+-2.0 --pkg=glib-2.0 -X -lm -o tp-icon main.vala

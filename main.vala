@@ -1,9 +1,10 @@
 using Gtk;
 
 /**
- * What is important to note is that this class is specifically described as being a subclass of GLib.Object. 
- * This is because Vala allows other types of class, but in most cases, this is the sort that you want. 
- * In fact, some language features of Vala are only allowed if your class is descended from GLib's Object.
+ * What is important to note is that this class is specifically described as being a
+ * subclass of GLib.Object. This is because Vala allows other types of class, but in
+ * most cases, this is the sort that you want. In fact, some language features of
+ * Vala are only allowed if your class is descended from GLib's Object.
  */
 public class TpIconApp : GLib.Object
 {
@@ -44,11 +45,22 @@ public class TpIconApp : GLib.Object
         public int getCurrentTemperature()
         {
             try {
-                string result;
-                Process.spawn_command_line_sync("sh ./tp.sh", out result);
-                return int.parse(result);
+                string sensorsResult;
+                Process.spawn_command_line_sync("sensors", out sensorsResult);
+                string[] lines = sensorsResult.split("\n");
+
+                double temperatureCount = 0;
+                int temperatures = 0;
+                for (int i = 0; i < lines.length; ++i) {
+                    if (!lines[i].contains("°C")) continue;
+                    string temperature = lines[i].split("°C")[0].split("+")[1];
+                    temperatureCount += double.parse(temperature);
+                    temperatures += 1;
+                }
+                int average = (int) GLib.Math.round(temperatureCount / temperatures);
+                return average;
             } catch (SpawnError e) {
-                print ("Error: %s\n", e.message);
+                print("Error: %s\n", e.message);
                 return 0;
             }
         }
