@@ -4,12 +4,14 @@ This program reads the device average temperature on Linux and shows correspondi
 
 The icons suppose temperature levels from cold to dangerously hot:
 
-<img src="icons/ok-0.png" width="25px">
-<img src="icons/ok-1.png" width="25px">
-<img src="icons/ok-2.png" width="25px">
-<img src="icons/warning-1.png" width="25px">
-<img src="icons/warning-2.png" width="25px">
-<img src="icons/bad-1.png" width="25px">
+<div>
+    <img src="icons/ok-0.png" width="25px">
+    <img src="icons/ok-1.png" width="25px">
+    <img src="icons/ok-2.png" width="25px">
+    <img src="icons/warning-1.png" width="25px">
+    <img src="icons/warning-2.png" width="25px">
+    <img src="icons/bad-1.png" width="25px">
+</div>
 
 ## Gettng Started
 
